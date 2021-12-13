@@ -72,19 +72,16 @@ Float24 Float24::operator-(Float24 f2)
     return *this + f2;
 }
 
-int reverseBits(uint32_t n, int bits = 17)
+Float24 Float24::operator-()
 {
-    uint32_t reverse = 0;
-    for (int pos = bits - 1; pos >= 0; --pos) {
-        if (n & 1)
-            reverse |= (1UL << pos);
-        n >>= 1;
-    }
-    return reverse;
+    *(uint32_t *)this ^= F24_SIGN;
+    return *this;
 }
 
 Float24 Float24::operator/(Float24 f2)
 {
+    if (*(uint32_t *)&f2 & F24_SIGN)
+        return *this * -newtonDivision(0.1f, -f2);
     return *this * newtonDivision(0.1f, f2);
 }
 

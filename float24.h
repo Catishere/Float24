@@ -32,6 +32,7 @@ public:
     int8_t getExponent();
     Float24 operator+(Float24 f2);
     Float24 operator-(Float24 f2);
+    Float24 operator-();
     Float24 operator/(Float24 f2);
     Float24 operator*(Float24 f2);
     bool operator==(Float24 f2);
